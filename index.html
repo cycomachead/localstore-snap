@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  <title>Snap Project Recovery</title>
+
+  <meta name="robots" content="noindex,follow">
+
+  <meta name="description" content="">
+
+  <meta name="keywords" content="">
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  </head>
+
+  <script src="jquery.js"></script>
+  <script src="FileSaver.min.js"></script>
+  <body>
+    <h1 class="">Snap! Projects</h1>
+
+     <ul id="proj-list"></ul>
+     
+     
+     <script type="text/javascript">
+     var baseTag = '-snap-project-';
+     if (!localStorage) {
+       throw new Error('ugh shits broken');
+     }
+  
+     function getKeys() {
+       return Object.keys(localStorage).filter(function (setting) {
+         return setting.indexOf(baseTag) === 0;
+       });
+     }
+  
+     function openXML(projName) {
+       var proj = localStorage[baseTag + projName];
+       var data = new Blob([proj], {type: "text/xml;charset=utf-8"})
+       saveAs(data, projName + '.xml');
+     }
+  
+     function makeLinks(sel) {
+       var list = $(sel)
+       getKeys().forEach(function (pName) {
+         var tag = $('<li>');
+         var a = $('<a>');
+         a.href = '#';
+         a.onclick = 'openXML(\''+ pName + '\')';
+         tag.append(a);
+         list.append(tag);
+       });
+     }
+  
+     makeLinks('#proj-list');
+     </script>
+  </body> 
+</html> 
