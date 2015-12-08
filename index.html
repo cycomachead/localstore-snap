@@ -47,6 +47,7 @@
          var a = $('<a>');
          a.href = '#';
          a.onclick = 'openXML(\''+ pName + '\')';
+         a.text(pName);
          tag.append(a);
          list.append(tag);
        });
