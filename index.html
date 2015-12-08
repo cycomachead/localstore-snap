@@ -43,10 +43,12 @@
      function makeLinks(sel) {
        var list = $(sel)
        getKeys().forEach(function (pName) {
+         pName = pName.slice(baseTag.length);
          var tag = $('<li>');
-         var a = $('<a>');
-         a.href = '#';
-         a.onclick = 'openXML(\''+ pName + '\')';
+         var a = $('<a>').attr({
+           href: '#',
+           onclick: 'openXML(\''+ pName + '\')'
+         });
          a.text(pName);
          tag.append(a);
          list.append(tag);
